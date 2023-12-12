@@ -31,7 +31,16 @@ export const handler = async (event) => {
         result = numberA * numberB;
         break;
       case "divide":
-        result = numberA / numberB;
+        if (numberB !== 0) {
+          result = numberA / numberB;
+        } else {
+          return {
+            statusCode: 400,
+            body: JSON.stringify({
+              error: "Cannot divide by 0",
+            }),
+          };
+        }
         break;
       default:
         return {
