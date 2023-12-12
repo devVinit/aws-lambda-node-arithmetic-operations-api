@@ -1,73 +1,96 @@
-# Arithmetic Operations API
+# AWS Lambda Node Arithmetic Operations API
 
-This API allows users to perform arithmetic operations like addition, subtraction, multiplication, and division. The API endpoints use HTTP methods such as POST for data transfer and the server validates the incoming data before processing.
+AWS Lambda Node Arithmetic Operations API
+This serverless API provides basic arithmetic operations (addition, subtraction, multiplication, and division) using AWS Lambda, AWS API Gateway and Node.js.
 
-Make sure you have the following tools installed on your machine:
+## Base URL
 
-- [Node.js](https://nodejs.org/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
-- [npm](https://www.npmjs.com/) - Node Package Manager, typically installed with Node.js.
+The base URL for this API is:
 
-## Setting Up the Project
+https://tpig21l8rd.execute-api.ap-south-1.amazonaws.com/prod/
 
-1. **Clone the Repository:**
+## API Documentation
 
-   ```bash
-   git clone https://github.com/devVinit/node-arithmetic-operations.git
-   cd node-arithmetic-operations
-   ```
+### 1. Addition
 
-2. **Install Dependencies:**
+**Endpoint:** `/add`
 
-   ```bash
-   npm install
-   ```
+**Method:** `POST`
 
-   This command will install all the project dependencies defined in the `package.json` file.
-
-## Running the Project Locally
-
-Now that the project is set up, you can run it locally. Follow the steps below:
-
-**Start the Application:**
-
-```bash
-npm start
-```
-
-This command will start your Node.js application. Visit [http://localhost:4000](http://localhost:4000) in your browser to see your application running.
-
-## Project Structure
-
-Here is an overview of the project structure:
-
-## Endpoints
-
-1. Addition
-
-   - URL: `/add`
-   - Method: `POST`
-
-2. Subtraction
-
-   - URL: `/subtract`
-   - Method: `POST`
-
-3. Multiplication
-
-   - URL: `/multiply`
-   - Method: `POST`
-
-4. Division
-   - URL: `/divide`
-   - Method: `POST`
-
-## Sample Data
-
-For the endpoints, send the data as JSON in the following format:
+**Request Schema:**
 
 ```json
 {
-  "numberA": 10,
-  "numberB": 2
+  "numberA": 100,
+  "numberB": 10
 }
+```
+
+```shell
+curl -X POST https://tpig21l8rd.execute-api.ap-south-1.amazonaws.com/prod/add \
+-H "Content-Type: application/json" \
+-d '{"numberA": 100, "numberB": 10}'
+```
+
+### 2. Subtraction
+
+**Endpoint:** `/subtract`
+
+**Method:** `POST`
+
+**Request Schema:**
+
+```json
+{
+  "numberA": 100,
+  "numberB": 10
+}
+```
+
+```shell
+curl -X POST https://tpig21l8rd.execute-api.ap-south-1.amazonaws.com/prod/subtract \
+-H "Content-Type: application/json" \
+-d '{"numberA": 100, "numberB": 10}'
+```
+
+### 3. Multiplication
+
+**Endpoint:** `/multiply`
+
+**Method:** `POST`
+
+**Request Schema:**
+
+```json
+{
+  "numberA": 100,
+  "numberB": 10
+}
+```
+
+```shell
+curl -X POST https://tpig21l8rd.execute-api.ap-south-1.amazonaws.com/prod/multiply \
+-H "Content-Type: application/json" \
+-d '{"numberA": 100, "numberB": 10}'
+```
+
+### 4. Division
+
+**Endpoint:** `/divide`
+
+**Method:** `POST`
+
+**Request Schema:**
+
+```json
+{
+  "numberA": 100,
+  "numberB": 10
+}
+```
+
+```shell
+curl -X POST https://tpig21l8rd.execute-api.ap-south-1.amazonaws.com/prod/divide \
+-H "Content-Type: application/json" \
+-d '{"numberA": 100, "numberB": 10}'
 ```

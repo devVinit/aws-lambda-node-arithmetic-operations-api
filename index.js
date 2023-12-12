@@ -1,20 +1,55 @@
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const app = express();
+export const handler = async (event) => {
+  try {
+    const body = JSON.parse(event.body);
+    const numberA = parseFloat(body.numberA);
+    const numberB = parseFloat(body.numberB);
 
-const controllers = require("./controllers");
+    // number validation
+    if (isNaN(numberA) || isNaN(numberB)) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          error: "Invalid request body",
+        }),
+      };
+    }
 
-const PORT = 4000;
+    const parts = event.resource.split("/");
+    const operation = parts[parts.length - 1];
 
-app.set("trust proxy", 1);
-app.use(express.urlencoded({ extended: true }));
-app.use(cors({}));
-app.use(express.json({ extended: true }));
-app.use(helmet());
+    let result;
 
-app.use("/", controllers);
+    // operations based on arithmetic operators
+    switch (operation) {
+      case "add":
+        result = numberA + numberB;
+        break;
+      case "subtract":
+        result = numberA - numberB;
+        break;
+      case "multiply":
+        result = numberA * numberB;
+        break;
+      case "divide":
+        result = numberA / numberB;
+        break;
+      default:
+        return {
+          statusCode: 400,
+          body: JSON.stringify({
+            error: "Invalid Operation",
+          }),
+        };
+    }
 
-app.listen(PORT, () =>
-  console.log(`Server is running on http://localhost:${PORT}`)
-);
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ result }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
+};
